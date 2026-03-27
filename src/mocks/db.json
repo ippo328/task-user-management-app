@@ -1,0 +1,119 @@
+{
+  "users": [
+    {
+      "id": "2",
+      "name": "Hanako Sato",
+      "email": "hanako.sato@example.com",
+      "role": "member",
+      "status": "active",
+      "createdAt": "2026-03-20T10:00:00.000Z"
+    },
+    {
+      "id": "4",
+      "name": "Yui Tanaka",
+      "email": "yui.tanaka@example.com",
+      "role": "member",
+      "status": "active",
+      "createdAt": "2026-03-21T11:00:00.000Z"
+    },
+    {
+      "id": "5",
+      "name": "Daichi Ito",
+      "email": "daichi.ito@example.com",
+      "role": "member",
+      "status": "active",
+      "createdAt": "2026-03-22T08:45:00.000Z"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "1",
+      "title": "Implement user search",
+      "description": "Add keyword search to the users page.",
+      "status": "todo",
+      "priority": "high",
+      "assigneeUserId": 2,
+      "dueDate": "2026-03-28",
+      "createdAt": "2026-03-22T09:00:00.000Z",
+      "updatedAt": "2026-03-22T09:00:00.000Z"
+    },
+    {
+      "id": "2",
+      "title": "Fix email validation",
+      "description": "Update validation rules for user email input.",
+      "status": "in_progress",
+      "priority": "medium",
+      "assigneeUserId": 1,
+      "dueDate": "2026-03-27",
+      "createdAt": "2026-03-22T10:00:00.000Z",
+      "updatedAt": "2026-03-23T11:30:00.000Z"
+    },
+    {
+      "id": "3",
+      "title": "Create task modal UI",
+      "description": "Build create/edit modal layout for tasks.",
+      "status": "done",
+      "priority": "medium",
+      "assigneeUserId": 4,
+      "dueDate": "2026-03-25",
+      "createdAt": "2026-03-21T15:00:00.000Z",
+      "updatedAt": "2026-03-24T08:00:00.000Z"
+    },
+    {
+      "id": "4",
+      "title": "Add delete confirmation",
+      "description": "Show confirmation dialog before deleting data.",
+      "status": "todo",
+      "priority": "low",
+      "assigneeUserId": 5,
+      "dueDate": "2026-03-30",
+      "createdAt": "2026-03-23T13:00:00.000Z",
+      "updatedAt": "2026-03-23T13:00:00.000Z"
+    },
+    {
+      "id": "5",
+      "title": "Refactor sidebar navigation",
+      "description": "Improve navigation structure and active link styles.",
+      "status": "in_progress",
+      "priority": "low",
+      "assigneeUserId": 2,
+      "dueDate": "2026-03-29",
+      "createdAt": "2026-03-23T14:20:00.000Z",
+      "updatedAt": "2026-03-24T09:10:00.000Z"
+    },
+    {
+      "id": "6",
+      "title": "Prepare dashboard summary",
+      "description": "Display user and task summary cards on dashboard.",
+      "status": "todo",
+      "priority": "high",
+      "assigneeUserId": 1,
+      "dueDate": "2026-03-26",
+      "createdAt": "2026-03-24T09:00:00.000Z",
+      "updatedAt": "2026-03-24T09:00:00.000Z"
+    },
+    {
+      "id": "7",
+      "title": "Update task filter logic",
+      "description": "Support filtering by status, priority, and assignee.",
+      "status": "done",
+      "priority": "high",
+      "assigneeUserId": 4,
+      "dueDate": "2026-03-24",
+      "createdAt": "2026-03-21T09:00:00.000Z",
+      "updatedAt": "2026-03-23T17:40:00.000Z"
+    },
+    {
+      "id": "8",
+      "title": "Review inactive users",
+      "description": "Check inactive user records and update status if needed.",
+      "status": "todo",
+      "priority": "medium",
+      "assigneeUserId": 3,
+      "dueDate": "2026-03-22",
+      "createdAt": "2026-03-20T16:30:00.000Z",
+      "updatedAt": "2026-03-20T16:30:00.000Z"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
