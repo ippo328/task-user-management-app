@@ -1,21 +1,40 @@
 # Task & User Management App
 
-## 概要
-React + TypeScript で作成した、業務向け管理画面を想定したポートフォリオです。  
-ユーザー管理とタスク管理を行う CRUD アプリとして構成しています。
+React + TypeScript で作成した、**業務向けのユーザー管理・タスク管理アプリ**です。  
+一覧表示、検索、絞り込み、CRUD、モーダルフォーム、削除確認、ダッシュボード集計など、実務でよくある管理画面の機能を意識して作成しました。
 
-実務でよくある以下のような機能を意識して実装しています。
+## URL
 
-- 一覧表示
-- 検索
-- 絞り込み
-- 新規作成
-- 編集
-- 削除
-- モーダルフォーム
+- Demo: https:// VercelのURL
+- GitHub: https://github.com/ippo328/task-user-management-app
+
+---
+
+## 作成目的
+
+フロントエンドのポートフォリオとして、**業務システムを想定した管理画面**を作成しました。
+
+単純なToDoアプリではなく、以下を意識しています。
+
+- ユーザー管理
+- タスク管理
+- ダッシュボードによる集計表示
+- 検索 / 絞り込み
+- モーダルでの作成 / 編集
 - 削除確認ダイアログ
 - 通知表示
-- ダッシュボード表示
+
+---
+
+## 想定利用シーン
+
+社内管理システムや業務支援システムを想定しています。
+
+- ユーザー情報の管理
+- タスクの登録 / 編集 / 削除
+- ステータスや優先度による管理
+- 担当者ごとの確認
+- ダッシュボードでの状況把握
 
 ---
 
@@ -36,6 +55,7 @@ React + TypeScript で作成した、業務向け管理画面を想定したポ�
 - ユーザー新規作成
 - ユーザー編集
 - ユーザー削除
+- 担当タスクが存在するユーザーの削除ガード
 
 ### タスク管理
 - タスク一覧表示
@@ -47,31 +67,16 @@ React + TypeScript で作成した、業務向け管理画面を想定したポ�
 - タスク編集
 - タスク削除
 
----
-
-## 使用技術
-- React
-- TypeScript
-- Vite
-- axios
-- react-hook-form
-- react-router-dom
-- json-server
-
----
-
-## 設計方針
-このアプリでは、責務を分離しやすくするために **Container / Presentation** 構成を採用しています。
-
-### 意識したポイント
-- Container コンポーネントで状態管理・API呼び出し・イベント処理を担当
-- Presentation コンポーネントで表示のみを担当
-- API呼び出しは service 層に分離
-- mock API として json-server を利用
+### 画面状態
+- ローディング表示
+- エラー表示
+- 0件表示
+- 再読み込み導線
 
 ---
 
 ## 画面一覧
+
 - `/dashboard`
 - `/users`
 - `/tasks`
@@ -79,50 +84,78 @@ React + TypeScript で作成した、業務向け管理画面を想定したポ�
 ---
 
 ## 画面イメージ
+
 ![ダッシュボード画面](docs/img/dashboard.png)
-![ユーザー一覧画面](docs/img/user.png)
-![ユーザー作成画面](docs/img/create_user.png)
-![タスク一覧画面](docs/img/task.png)
-![タスク作成画面](docs/img/create_task.png)
+![ユーザー一覧画面](docs/img/users-list.png)
+![ユーザー作成画面](docs/img/users-create.png)
+![タスク一覧画面](docs/img/tasks-list.png)
+![タスク作成画面](docs/img/tasks-create.png)
 
 ---
 
-## 画面・UIのポイント
-- サイドバー付きレイアウト
-- ダッシュボードのサマリーカード表示
-- 検索・絞り込み機能
-- 作成 / 編集用モーダル
-- 削除確認ダイアログ
-- Toast 通知
-- Status / Priority の Badge 表示
+## 使用技術
+
+- React
+- TypeScript
+- Vite
+- axios
+- react-hook-form
+- react-router-dom
+- json-server
+- dayjs
+- ESLint
 
 ---
 
-## ディレクトリ構成
-```txt
-src/
-  app/
-    router.tsx
-  components/
-    common/
-    dashboard/
-    layout/
-    tasks/
-    users/
-  mocks/
-    db.json
-  pages/
-    DashboardPage.tsx
-    TasksPage.tsx
-    UsersPage.tsx
-  services/
-    apiClient.ts
-    tasksService.ts
-    usersService.ts
-  types/
-    dashboard.ts
-    task.ts
-    user.ts
-  utils/
-    date.ts
-    filters.ts
+## 設計・構成で意識した点
+
+このアプリでは、責務を分離しやすくするために **Container / Presentation 構成** を意識しています。
+
+### ポイント
+- Container コンポーネントで状態管理・API呼び出し・イベント処理を担当
+- Presentation コンポーネントで表示を担当
+- API呼び出しは `services` に分離
+- mock API として `json-server` を利用
+- 将来的に本番APIへ差し替えやすい構成を意識
+
+---
+
+## 工夫した点
+
+- 業務画面を意識し、ユーザー管理とタスク管理の2機能を1つのアプリにまとめた
+- ダッシュボードで全体状況を把握できるようにした
+- 検索 / 絞り込み / CRUD を一通り揃え、管理画面らしい操作性を意識した
+- モーダルフォームや削除確認ダイアログを導入し、実務画面に近いUIを意識した
+- API呼び出しを service 層に分離し、見通しと保守性を意識した
+- データ整合性を見直し、担当タスクを持つユーザーは削除できないようにした
+- 一覧画面にローディング、エラー、0件、再読み込みの状態を追加した
+
+---
+
+## 苦労した点
+
+- 画面表示とロジックを分離しながら実装する構成整理
+- ユーザー管理とタスク管理で共通する一覧画面の操作感の統一
+- フォーム入力、更新、削除確認、通知表示など、管理画面に必要な挙動の整理
+- mock API 前提でも、本番APIへ差し替えやすい構成を意識したこと
+- ユーザーとタスクの参照整合性を保ちながら削除制御を追加したこと
+
+---
+
+## このアプリについて
+
+このアプリは、**mock API（json-server）を利用したフロントエンドポートフォリオ**です。  
+フロントエンドは Vercel、mock API は Render 上で公開しています。  
+フロントエンド側では API 呼び出しを service 層に分離することで、将来的に本番APIへ差し替えしやすい構成を意識しています。
+
+> ※ mock API は無料枠を利用しているため、初回アクセス時に少し時間がかかる場合があります。
+
+---
+
+## セットアップ
+
+### 1. リポジトリをクローン
+
+```bash
+git clone https://github.com/ippo328/task-user-management-app.git
+cd task-user-management-app

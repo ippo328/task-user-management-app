@@ -90,7 +90,18 @@ export function TasksPageComponent({
         />
       </div>
 
-      {loading ? <div style={styles.message}>Loading tasks...</div> : null}
+      {!loading && !error && tasks.length === 0 ? (
+        <p style={styles.message}>No tasks found.</p>
+      ) : null}
+
+      {!loading && !error && tasks.length > 0 ? (
+        <TasksTableComponent
+          tasks={tasks}
+          users={users}
+          onEdit={onEdit}
+          onDelete={onDelete}
+        />
+      ) : null}
       {error ? <div style={styles.error}>{error}</div> : null}
 
       {!loading && !error ? (
