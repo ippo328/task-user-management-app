@@ -69,7 +69,17 @@ export function UsersPageComponent({
         />
       </div>
 
-      {loading ? <div style={styles.message}>Loading users...</div> : null}
+      {!loading && !error && users.length === 0 ? (
+        <p style={styles.message}>No users found.</p>
+      ) : null}
+
+      {!loading && !error && users.length > 0 ? (
+        <UsersTableComponent
+          users={users}
+          onEdit={onEdit}
+          onDelete={onDelete}
+        />
+      ) : null}
       {error ? <div style={styles.error}>{error}</div> : null}
 
       {!loading && !error ? (

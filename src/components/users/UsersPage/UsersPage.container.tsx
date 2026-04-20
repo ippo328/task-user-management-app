@@ -10,6 +10,8 @@ import { ConfirmDialogComponent } from '../../common/ConfirmDialog/ConfirmDialog
 import { ToastComponent } from '../../common/Toast/Toast.component';
 import { UserFormModalContainer } from '../UserFormModal/UserFormModal.container';
 import { UsersPageComponent } from './UsersPage.component';
+import { getTasks } from '../../../services/tasksService';
+import type { Task } from '../../../types/task';
 
 const initialFilters: UserFilters = {
   keyword: '',
@@ -42,6 +44,8 @@ export function UsersPageContainer() {
     message: '',
     type: 'success',
   });
+
+  const [tasks, setTasks] = useState<Task[]>([]);
 
   useEffect(() => {
     void fetchUsers();
@@ -101,6 +105,17 @@ export function UsersPageContainer() {
   };
 
   const handleDelete = (user: User) => {
+    const hasAssignedTasks = tasks.some((task) => task.assigneeUserId === user.id);
+
+    if (hasAssignedTasks) {
+      setToast({
+        open: true,
+        message: 'This user cannot be deleted because tasks are assigned.',
+        type: 'error',
+      });
+      return;
+    }
+
     setDeletingUser(user);
   };
 
@@ -175,20 +190,22 @@ export function UsersPageContainer() {
     }
   };
 
-  async function fetchUsers() {
-    try {
-      setLoading(true);
-      setError(null);
+async function fetchUsers() {
+  try {
+    setLoading(true);
+    setError(null);
 
-      const data = await getUsers();
-      setUsers(data);
-    } catch (err) {
-      console.error(err);
-      setError('Failed to load users.');
-    } finally {
-      setLoading(false);
-    }
+    const [usersData, tasksData] = await Promise.all([getUsers(), getTasks()]);
+
+    setUsers(usersData);
+    setTasks(tasksData);
+  } catch (err) {
+    console.error(err);
+    setError('Failed to load users.');
+  } finally {
+    setLoading(false);
   }
+}
 
   return (
     <>
