@@ -5,7 +5,7 @@ React + TypeScript で作成した、**業務向けのユーザー管理・タ�
 
 ## URL
 
-- Demo: https:// VercelのURL
+- Demo: https://task-user-management-app.vercel.app/dashboard
 - GitHub: https://github.com/ippo328/task-user-management-app
 
 ---
